@@ -12,7 +12,7 @@ namespace DriveTracker.App_Start
         {
             Mapper.Initialize(config =>
             {
-
+                config.CreateMap<DriveTracker.Entities.User, DriveTracker.Models.UserDto>();
             });
         }
             

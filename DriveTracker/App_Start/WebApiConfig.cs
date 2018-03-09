@@ -1,10 +1,13 @@
 ﻿using DriveTracker.App_Start;
 using DriveTracker.DbContexts;
+using DriveTracker.Repositories;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Formatting;
+using System.Net.Http.Headers;
 using System.Web.Http;
 using Unity;
 
@@ -16,6 +19,8 @@ namespace DriveTracker
         {
             var container = new UnityContainer();
             container.RegisterType<AppDbContext, AppDbContext>();
+            container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterType<ICarRepository, CarRepository>();
 
             config.DependencyResolver = new UnityResolver(container);
             // Konfiguracja i usługi składnika Web API
@@ -23,14 +28,10 @@ namespace DriveTracker
             // Trasy składnika Web API
             config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
 
-            var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().FirstOrDefault();
-            jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
+            config.Formatters.JsonFormatter.SerializerSettings.Formatting = Formatting.Indented;
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
     }
 }
