@@ -18,6 +18,10 @@ namespace DriveTracker.Entities
         public string Name { get; set; }
         [Required]
         public double FuelConsumption { get; set; }
+        [Required]
+        public int FuelId { get; set; }
+        [Required]
+        public Fuel Fuel { get; set; }
         public List<Journey> Journeys { get; set; } = new List<Journey>();
     }
 }

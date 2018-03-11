@@ -24,5 +24,10 @@ namespace DriveTracker.Repositories
         {
             return _context.Users;
         }
+
+        public bool UserExists(int id)
+        {
+            return _context.Users.Any(u => u.Id == id);
+        }
     }
 }

@@ -16,6 +16,7 @@ namespace DriveTracker.DbContexts
         public DbSet<PaymentAcceptanceRequest> PaymentAcceptanceRequests { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserJourney> UserJourneys { get; set; }
+        public DbSet<Fuel> Fuels { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

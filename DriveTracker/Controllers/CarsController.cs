@@ -1,4 +1,8 @@
-﻿using System;
+﻿using AutoMapper;
+using DriveTracker.Entities;
+using DriveTracker.Models;
+using DriveTracker.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,21 +14,96 @@ namespace DriveTracker.Controllers
     [RoutePrefix("api/users/{userId}/cars")]
     public class CarsController : ApiController
     {
-        [HttpGet,Route("")]
-        public IEnumerable<string> GetCars()
+        private ICarRepository _carRepository;
+        private IUserRepository _userRepository;
+        private IAppRepository _appRepository;
+
+        public CarsController(ICarRepository carRepository,IUserRepository userRepository,IAppRepository appRepository)
         {
-            return new string[] { "value1", "value2" };
+            _carRepository = carRepository;
+            _userRepository = userRepository;
+            _appRepository = appRepository;
+        }
+        [HttpGet,Route("")]
+        public IHttpActionResult GetCars(int userId)
+        {
+
+            try
+            {
+                if(!_userRepository.UserExists(userId))
+                {
+                    return NotFound();
+                }
+
+                var carsFromRepo = _carRepository.GetCarsForUser(userId);
+
+                var cars = Mapper.Map<IEnumerable<CarDto>>(carsFromRepo);
+
+                return Ok(cars);
+            }
+            catch(Exception)
+            {
+                return InternalServerError();
+            }
+            
         }
 
         [HttpGet, Route("{id}")]
-        public string GetCar(int id)
+
+        public IHttpActionResult GetCar(int userId,int id)
         {
-            return "value";
+            try
+            {
+                if (!_userRepository.UserExists(userId))
+                {
+                    return NotFound();
+                }
+
+                var carFromRepo = _carRepository.GetCarForUser(userId,id);
+
+                var car = Mapper.Map<CarDto>(carFromRepo);
+
+                return Ok(car);
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        
+        [HttpPost,Route("")]
+        public IHttpActionResult CreateCar([FromBody]CarForCreationDto carFromBody, int userId )
         {
+            try
+            {
+                if(carFromBody==null)
+                {
+                    return BadRequest();
+                }
+
+                if(!_userRepository.UserExists(userId))
+                {
+                    return NotFound();
+                }
+
+                var car = Mapper.Map<Car>(carFromBody);
+
+                _carRepository.AddCarForUser(userId, car);
+
+                if(!_appRepository.Commit())
+                {
+                    return InternalServerError();
+                }
+
+                var carToReturn = Mapper.Map<CarDto>(car);
+                //do zmiany
+                return CreatedAtRoute("GetCar",new {id = carToReturn.Id }, carToReturn);
+            }
+            catch(Exception)
+            {
+                return InternalServerError();
+            }
         }
 
         // PUT api/<controller>/5

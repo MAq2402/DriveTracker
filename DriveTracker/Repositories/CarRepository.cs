@@ -15,14 +15,21 @@ namespace DriveTracker.Repositories
         {
             _context = context;
         }
-        public Car GetCar(int userId, int id)
+
+        public void AddCarForUser(int userId,Car car)
         {
-            return _context.Cars.Where(c => c.UserId == userId).FirstOrDefault(c => c.Id == id);
+            _context.Users.FirstOrDefault(u => u.Id == userId).Cars.Add(car);
         }
 
-        public IEnumerable<Car> GetCars(int userId)
+        public Car GetCarForUser(int userId, int id)
         {
-            return _context.Cars.Where(c => c.UserId == userId);
+            return _context.Cars.Include("Fuel").Where(c => c.UserId == userId).FirstOrDefault(c => c.Id == id);
+        }
+
+        public IEnumerable<Car> GetCarsForUser(int userId)
+        {
+            return _context.Cars.Include("Fuel").Where(c => c.UserId == userId);
+
         }
     }
 }

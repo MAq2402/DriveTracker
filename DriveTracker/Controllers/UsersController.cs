@@ -20,27 +20,44 @@ namespace DriveTracker.Controllers
             _userRepository = userRepository;
         }
         [HttpGet,Route("")]
-        public IHttpActionResult GetUsers(bool cars = false, bool balances = false, bool payments = false, bool userJourneys = false)
+        public IHttpActionResult GetUsers()
         {
-            var users = _userRepository.GetUsers();
+            try
+            {
+                var usersFromRepo = _userRepository.GetUsers();
 
-            Mapper.Map<IEnumerable<UserDto>>(users);
+                var users = Mapper.Map<IEnumerable<UserDto>>(usersFromRepo);
 
-            return Ok(users);
+                return Ok(users);
+            }
+            catch(Exception)
+            {
+                return InternalServerError();
+            }
+            
         }
 
         [HttpGet,Route("{id}")]
-        public IHttpActionResult GetUser(int id, bool cars = false, bool balances = false, bool payments = false, bool userJourneys = false)
+        public IHttpActionResult GetUser(int id)
         {
-            var user = _userRepository.GetUser(id);
-            if(user==null)
+            try
             {
-                return NotFound();
+                var userFromRepo = _userRepository.GetUser(id);
+
+                if (userFromRepo == null)
+                {
+                    return NotFound();
+                }
+
+                var user = Mapper.Map<UserDto>(userFromRepo);
+
+                return Ok(user);
             }
-
-            Mapper.Map<UserDto>(user);
-
-            return Ok(user);
+            catch(Exception)
+            {
+                return InternalServerError();
+            }
+           
         }
 
         // POST api/<controller>

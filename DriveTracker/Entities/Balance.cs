@@ -15,6 +15,7 @@ namespace DriveTracker.Entities
         public decimal ToReceive { get; set; }
         public decimal Payed { get; set; }
         public decimal Received { get; set; }
+        public int Year { get; set; }
         public Month Month{ get; set; }
         [Required,ForeignKey("User")]
         public int UserId { get; set; }

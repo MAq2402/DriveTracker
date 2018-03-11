@@ -21,6 +21,25 @@ namespace DriveTracker.Migrations
                     FirstName = "Micha³",
                     LastName = "Miciak",
                     UserName = "MAq"
+                },
+                new User
+                {
+                    FirstName = "Kuba",
+                    LastName = "Jaworek",
+                    UserName = "Jawor"
+                },
+                new User
+                {
+                    FirstName = "Leo",
+                    LastName = "Messi",
+                    UserName = "Messi10"
+                });
+            context.Fuels.AddOrUpdate(f => f.Id,
+                new Fuel
+                {
+                    PriceForLiter = 1.88m,
+                    Type = FuelType.lpg
+
                 });
             //  This method will be called after migrating to the latest version.
 

@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace DriveTracker.Repositories
 {
-    public interface ICarRepository
+    public interface IFuelRepository
     {
-        IEnumerable<Car> GetCarsForUser(int userId);
-        Car GetCarForUser(int userId,int id);
-        void AddCarForUser(int userId,Car car);
+        IEnumerable<Fuel> GetFuels();
+        Fuel GetFuel(int id);
     }
 }
