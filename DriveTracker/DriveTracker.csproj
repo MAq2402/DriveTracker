@@ -241,6 +241,10 @@
     <Compile Include="Migrations\201803112136184_11.03.2018V3.Designer.cs">
       <DependentUpon>201803112136184_11.03.2018V3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803112213009_11.03.2018v4.cs" />
+    <Compile Include="Migrations\201803112213009_11.03.2018v4.Designer.cs">
+      <DependentUpon>201803112213009_11.03.2018v4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CarDto.cs" />
     <Compile Include="Models\CarForCreationDto.cs" />
@@ -375,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803112136184_11.03.2018V3.resx">
       <DependentUpon>201803112136184_11.03.2018V3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803112213009_11.03.2018v4.resx">
+      <DependentUpon>201803112213009_11.03.2018v4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -17,7 +17,7 @@ namespace DriveTracker.Entities
         [Required]
         public string Name { get; set; }
         [Required]
-        public double FuelConsumption { get; set; }
+        public double FuelConsumption100km { get; set; }
         [Required]
         public int FuelId { get; set; }
         [Required]

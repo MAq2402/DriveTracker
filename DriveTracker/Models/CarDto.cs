@@ -11,7 +11,8 @@ namespace DriveTracker.Models
         public int Id { get; set; }
         public int UserId { get; set; }
         public string Name { get; set; }
-        public double FuelConsumption { get; set; }
+        public double FuelConsumption100km { get; set; }
+        public FuelDto Fuel { get; set; }
         //public List<Journey> Journeys { get; set; } = new List<Journey>();
     }
 }

@@ -34,7 +34,7 @@ namespace DriveTracker.Migrations
                     LastName = "Messi",
                     UserName = "Messi10"
                 });
-            context.Fuels.AddOrUpdate(f => f.Id,
+            context.Fuels.AddOrUpdate(f => f.Type,
                 new Fuel
                 {
                     PriceForLiter = 1.88m,
