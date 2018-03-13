@@ -11,5 +11,6 @@ namespace DriveTracker.Repositories
     {
         IEnumerable<Fuel> GetFuels();
         Fuel GetFuel(int id);
+        bool FuelExists(int id);
     }
 }

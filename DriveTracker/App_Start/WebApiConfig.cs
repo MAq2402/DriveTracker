@@ -18,7 +18,7 @@ namespace DriveTracker
         public static void Register(HttpConfiguration config)
         {
             var container = new UnityContainer();
-            container.RegisterType<AppDbContext, AppDbContext>();
+            container.RegisterSingleton<AppDbContext, AppDbContext>();
             container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<ICarRepository, CarRepository>();
             container.RegisterType<IAppRepository, AppRepository>();

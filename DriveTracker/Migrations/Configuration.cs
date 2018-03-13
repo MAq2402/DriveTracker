@@ -11,36 +11,53 @@ namespace DriveTracker.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
+            
         }
 
         protected override void Seed(DriveTracker.DbContexts.AppDbContext context)
         {
-            context.Users.AddOrUpdate(u => u.UserName,
-                new User
-                {
-                    FirstName = "Micha³",
-                    LastName = "Miciak",
-                    UserName = "MAq"
-                },
-                new User
-                {
-                    FirstName = "Kuba",
-                    LastName = "Jaworek",
-                    UserName = "Jawor"
-                },
-                new User
-                {
-                    FirstName = "Leo",
-                    LastName = "Messi",
-                    UserName = "Messi10"
-                });
-            context.Fuels.AddOrUpdate(f => f.Type,
-                new Fuel
-                {
-                    PriceForLiter = 1.88m,
-                    Type = FuelType.lpg
 
-                });
+            var user1 = new User
+            {
+                FirstName = "Micha³",
+                LastName = "Miciak",
+                UserName = "MAq"
+            };
+            var user2 = new User
+            {
+                FirstName = "Kuba",
+                LastName = "Jaworek",
+                UserName = "Jawor"
+            };
+            var user3 = new User
+            {
+                FirstName = "Leo",
+                LastName = "Messi",
+                UserName = "Messi10"
+            };
+
+            context.Users.AddOrUpdate(u => u.UserName, user1);
+            context.Users.AddOrUpdate(u => u.UserName, user2);
+            context.Users.AddOrUpdate(u => u.UserName, user3);
+
+            var fuel = new Fuel
+            {
+                PriceForLiter = 1.88m,
+                Type = FuelType.lpg
+
+            };
+
+            context.Fuels.AddOrUpdate(f => f.Type, fuel);
+
+            var car = new Car
+            {
+                FuelId = 1,
+                UserId = 1,
+                FuelConsumption100km = 1.7,
+                Name = "xD",
+            };
+            context.Cars.AddOrUpdate(c => c.Name, car);
+                
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 

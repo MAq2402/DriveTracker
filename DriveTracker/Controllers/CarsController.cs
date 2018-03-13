@@ -17,12 +17,14 @@ namespace DriveTracker.Controllers
         private ICarRepository _carRepository;
         private IUserRepository _userRepository;
         private IAppRepository _appRepository;
+        private IFuelRepository _fuelRepository;
 
-        public CarsController(ICarRepository carRepository,IUserRepository userRepository,IAppRepository appRepository)
+        public CarsController(ICarRepository carRepository,IUserRepository userRepository,IAppRepository appRepository,IFuelRepository fuelRepository)
         {
             _carRepository = carRepository;
             _userRepository = userRepository;
             _appRepository = appRepository;
+            _fuelRepository = fuelRepository;
         }
         [HttpGet,Route("")]
         public IHttpActionResult GetCars(int userId)
@@ -48,7 +50,7 @@ namespace DriveTracker.Controllers
             
         }
 
-        [HttpGet, Route("{id}")]
+        [HttpGet, Route("{id}",Name ="GetCar")]
 
         public IHttpActionResult GetCar(int userId,int id)
         {
@@ -60,6 +62,11 @@ namespace DriveTracker.Controllers
                 }
 
                 var carFromRepo = _carRepository.GetCarForUser(userId,id);
+
+                if(carFromRepo==null)
+                {
+                    return NotFound();
+                }
 
                 var car = Mapper.Map<CarDto>(carFromRepo);
 
@@ -87,9 +94,19 @@ namespace DriveTracker.Controllers
                     return NotFound();
                 }
 
+                var fuel = _fuelRepository.GetFuel(carFromBody.FuelId);
+
+                if(fuel==null)
+                {
+                    return NotFound();
+                }
+
                 var car = Mapper.Map<Car>(carFromBody);
 
-                _carRepository.AddCarForUser(userId, car);
+               car.Fuel = fuel;
+
+                _carRepository.AddCarForUser(userId,car);
+
 
                 if(!_appRepository.Commit())
                 {
@@ -97,23 +114,13 @@ namespace DriveTracker.Controllers
                 }
 
                 var carToReturn = Mapper.Map<CarDto>(car);
-                //do zmiany
+
                 return CreatedAtRoute("GetCar",new {id = carToReturn.Id }, carToReturn);
             }
             catch(Exception)
-            {
+            {           
                 return InternalServerError();
             }
-        }
-
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
         }
     }
 }

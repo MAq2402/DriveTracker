@@ -10,5 +10,6 @@ namespace DriveTracker.Models
         public string Name { get; set; }
         public double FuelConsumption100km { get; set; }
         public int FuelId { get; set; }
+        public int UserId { get; set; }
     }
 }

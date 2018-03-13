@@ -15,6 +15,12 @@ namespace DriveTracker.Repositories
         {
             _context = context;
         }
+
+        public bool FuelExists(int id)
+        {
+            return _context.Fuels.Any(f => f.Id == id);
+        }
+
         public Fuel GetFuel(int id)
         {
             return _context.Fuels.FirstOrDefault(f => f.Id == id);
