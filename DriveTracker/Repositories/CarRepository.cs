@@ -32,5 +32,10 @@ namespace DriveTracker.Repositories
             return _context.Cars.Include("Fuel").Where(c => c.UserId == userId);
 
         }
+
+        public void UpdateCar()
+        {
+            //empty method
+        }
     }
 }

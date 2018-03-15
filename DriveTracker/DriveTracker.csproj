@@ -63,6 +63,12 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="JsonPatch, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\JsonPatch.1.0.2\lib\net45\JsonPatch.dll</HintPath>
+    </Reference>
+    <Reference Include="Marvin.JsonPatch, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Marvin.JsonPatch.2.1.0\lib\portable40-net40+win8\Marvin.JsonPatch.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
     </Reference>
@@ -248,6 +254,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CarDto.cs" />
     <Compile Include="Models\CarForCreationDto.cs" />
+    <Compile Include="Models\CarForUpdateDto.cs" />
     <Compile Include="Models\FuelDto.cs" />
     <Compile Include="Models\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

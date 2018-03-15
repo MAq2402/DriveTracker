@@ -2,6 +2,7 @@
 using DriveTracker.Entities;
 using DriveTracker.Models;
 using DriveTracker.Repositories;
+using Marvin.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -119,6 +120,52 @@ namespace DriveTracker.Controllers
             }
             catch(Exception)
             {           
+                return InternalServerError();
+            }
+        }
+
+        [HttpPatch,Route("{id}")]
+
+        public IHttpActionResult PatchCar([FromBody]JsonPatchDocument<CarForUpdateDto> patchDoc,int userId,int id)
+        {
+            try
+            {
+                if (patchDoc == null)
+                {
+                    return BadRequest();
+                }
+
+                if (!_userRepository.UserExists(userId))
+                {
+                    return NotFound();
+                }
+
+                var car = _carRepository.GetCarForUser(userId, id);
+
+                if(car ==null)
+                {
+                    return NotFound();
+                }
+
+                var carForPatch = Mapper.Map<CarForUpdateDto>(car);
+
+                patchDoc.ApplyTo(carForPatch);
+
+                Mapper.Map(carForPatch,car);
+
+                _carRepository.UpdateCar();
+
+                if (!_appRepository.Commit())
+                {
+                    return InternalServerError();
+                }
+
+                var carToReturn = Mapper.Map<CarDto>(car);
+
+                return Ok(carToReturn);
+            }
+            catch (Exception)
+            {
                 return InternalServerError();
             }
         }
