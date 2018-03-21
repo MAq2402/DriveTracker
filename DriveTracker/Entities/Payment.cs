@@ -30,9 +30,6 @@ namespace DriveTracker.Entities
         public decimal Amount { get; set; }
         public DateTime DateTime { get; set; }
         public bool IsPayed { get; set; } = false;
-        [Required,ForeignKey("PaymentAcceptanceRequest")]
-        public int PaymentAcceptanceRequestId { get; set; }
-        [Required]
-        public PaymentAcceptanceRequest PaymentAcceptanceRequest { get; set; }
+
     }
 }

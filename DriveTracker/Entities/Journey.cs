@@ -26,5 +26,6 @@ namespace DriveTracker.Entities
         public Car Car { get; set; }
         List<UserJourney> UserJourneys { get; set; } = new List<UserJourney>();
         public DateTime DateTime { get; set; }
+        public decimal PricePerKm { get; set; }
     }
 }

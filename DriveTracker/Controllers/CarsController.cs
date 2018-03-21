@@ -18,14 +18,12 @@ namespace DriveTracker.Controllers
         private ICarRepository _carRepository;
         private IUserRepository _userRepository;
         private IAppRepository _appRepository;
-        private IFuelRepository _fuelRepository;
 
-        public CarsController(ICarRepository carRepository,IUserRepository userRepository,IAppRepository appRepository,IFuelRepository fuelRepository)
+        public CarsController(ICarRepository carRepository,IUserRepository userRepository,IAppRepository appRepository)
         {
             _carRepository = carRepository;
             _userRepository = userRepository;
             _appRepository = appRepository;
-            _fuelRepository = fuelRepository;
         }
         [HttpGet,Route("")]
         public IHttpActionResult GetCars(int userId)
@@ -95,16 +93,8 @@ namespace DriveTracker.Controllers
                     return NotFound();
                 }
 
-                var fuel = _fuelRepository.GetFuel(carFromBody.FuelId);
-
-                if(fuel==null)
-                {
-                    return NotFound();
-                }
-
                 var car = Mapper.Map<Car>(carFromBody);
 
-               car.Fuel = fuel;
 
                 _carRepository.AddCarForUser(userId,car);
 
@@ -169,5 +159,41 @@ namespace DriveTracker.Controllers
                 return InternalServerError();
             }
         }
+
+        [HttpDelete,Route("{id}")]
+        public IHttpActionResult DeleteCar(int userId,int id)
+        {
+            try
+            {
+                if (!_userRepository.UserExists(userId))
+                {
+                    return NotFound();
+                }
+
+                var car = _carRepository.GetCarForUser(userId, id);
+
+                if (car == null)
+                {
+                    return NotFound();
+                }
+
+                _carRepository.DeleteCar(car);
+
+                if(!_appRepository.Commit())
+                {
+                    return InternalServerError();
+                }
+
+                return StatusCode(HttpStatusCode.NoContent);
+
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
+            
+
+        }
+
     }
 }

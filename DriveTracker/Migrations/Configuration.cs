@@ -39,20 +39,11 @@ namespace DriveTracker.Migrations
             context.Users.AddOrUpdate(u => u.UserName, user1);
             context.Users.AddOrUpdate(u => u.UserName, user2);
             context.Users.AddOrUpdate(u => u.UserName, user3);
-
-            var fuel = new Fuel
-            {
-                PriceForLiter = 1.88m,
-                Type = FuelType.lpg
-
-            };
-
-            context.Fuels.AddOrUpdate(f => f.Type, fuel);
-
+            
             var car = new Car
             {
-                FuelId = 1,
-                UserId = 1,
+                FuelType =FuelType.lpg,
+                UserId = 6,
                 FuelConsumption100km = 1.7,
                 Name = "xD",
             };

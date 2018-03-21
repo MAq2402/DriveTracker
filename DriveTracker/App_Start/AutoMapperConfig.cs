@@ -16,13 +16,10 @@ namespace DriveTracker.App_Start
                 config.CreateMap<DriveTracker.Entities.User, DriveTracker.Models.UserDto>();
 
                 config.CreateMap<DriveTracker.Entities.Car, DriveTracker.Models.CarDto>();
+                //.ForMember(dest=>dest.FuelType,opt=>opt.MapFrom(src=>Enum.GetName(typeof(FuelType),src.FuelType)));
                 config.CreateMap<DriveTracker.Models.CarForCreationDto, DriveTracker.Entities.Car>();
                 config.CreateMap<DriveTracker.Models.CarForUpdateDto, DriveTracker.Entities.Car>();
-                config.CreateMap<DriveTracker.Entities.Car,DriveTracker.Models.CarForUpdateDto>();
-
-                config.CreateMap<DriveTracker.Entities.Fuel, DriveTracker.Models.FuelDto>()
-                .ForMember(dest=>dest.Type,opt=>opt.MapFrom(src=>Enum.GetName(typeof(FuelType),src.Type)));
-                
+                config.CreateMap<DriveTracker.Entities.Car,DriveTracker.Models.CarForUpdateDto>();              
             });
         }
             

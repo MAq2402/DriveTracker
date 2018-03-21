@@ -7,6 +7,14 @@ using System.Web;
 
 namespace DriveTracker.Entities
 {
+    public enum FuelType
+    {
+        benzine,
+        diesel,
+        lpg,
+        hybrid,
+        electric
+    }
     public class Car
     {
         public int Id { get; set; }
@@ -18,10 +26,7 @@ namespace DriveTracker.Entities
         public string Name { get; set; }
         [Required]
         public double FuelConsumption100km { get; set; }
-        [Required,ForeignKey("Fuel")]
-        public int FuelId { get; set; }
-        [Required]
-        public Fuel Fuel { get; set; }
         public List<Journey> Journeys { get; set; } = new List<Journey>();
+        public FuelType FuelType { get; set; }
     }
 }

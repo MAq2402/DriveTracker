@@ -13,17 +13,9 @@ namespace DriveTracker.DbContexts
         public DbSet<Car> Cars { get; set; }
         public DbSet<Journey> Journeys { get; set; }
         public DbSet<Payment> Payments { get; set; }
-        public DbSet<PaymentAcceptanceRequest> PaymentAcceptanceRequests { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserJourney> UserJourneys { get; set; }
-        public DbSet<Fuel> Fuels { get; set; }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
+        public DbSet<Notification> Notifications { get; set; }
 
-            modelBuilder.Entity<Payment>()
-                .HasOptional(p => p.PaymentAcceptanceRequest)
-                .WithRequired(par=>par.Payment);
-        }
     }
 }
