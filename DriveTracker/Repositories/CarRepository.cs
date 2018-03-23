@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using DriveTracker.DbContexts;
@@ -27,13 +28,29 @@ namespace DriveTracker.Repositories
             _context.Cars.Remove(car);
         }
 
-        public Car GetCarForUser(int userId, int id)
+        public Car GetCarForUser(int userId, int id,bool journeys)
         {
-            return _context.Cars.Where(c => c.UserId == userId).FirstOrDefault(c => c.Id == id);
+            if(journeys)
+            {
+                return _context.Cars.Include(c=>c.Journeys)
+                                    .Where(c => c.UserId == userId)
+                                    .FirstOrDefault(c => c.Id == id);
+            }
+            return _context.Cars.Where(c => c.UserId == userId)
+                                .FirstOrDefault(c => c.Id == id);
         }
 
-        public IEnumerable<Car> GetCarsForUser(int userId)
-        {
+        public IEnumerable<Car> GetCarsForUser(int userId, bool journeys)
+        {          
+            if(journeys)
+            {
+                //return _context.Cars.Include(c => c.Journeys).Where(c => c.UserId == userId);
+              return _context.Cars.Include(c => c.Journeys)
+                                  .Where(c => c.UserId == userId);
+            }
+            
+           
+            
             return _context.Cars.Where(c => c.UserId == userId);
 
         }

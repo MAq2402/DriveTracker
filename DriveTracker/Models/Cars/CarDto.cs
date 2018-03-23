@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace DriveTracker.Models
+namespace DriveTracker.Models.Cars
 {
     public class CarDto
     {
@@ -13,6 +13,6 @@ namespace DriveTracker.Models
         public string Name { get; set; }
         public double FuelConsumption100km { get; set; }
         public string FuelType { get; set; }
-        //public List<Journey> Journeys { get; set; } = new List<Journey>();
+        public List<Journey> Journeys { get; set; } = new List<Journey>();
     }
 }

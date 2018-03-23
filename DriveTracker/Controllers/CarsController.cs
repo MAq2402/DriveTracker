@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DriveTracker.Entities;
-using DriveTracker.Models;
+using DriveTracker.Models.Cars;
+using DriveTracker.Models.Users;
 using DriveTracker.Repositories;
 using Marvin.JsonPatch;
 using System;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Controllers;
 
 namespace DriveTracker.Controllers
 {
@@ -26,7 +28,7 @@ namespace DriveTracker.Controllers
             _appRepository = appRepository;
         }
         [HttpGet,Route("")]
-        public IHttpActionResult GetCars(int userId)
+        public IHttpActionResult GetCars(int userId,bool journeys = false)
         {
 
             try
@@ -36,7 +38,7 @@ namespace DriveTracker.Controllers
                     return NotFound();
                 }
 
-                var carsFromRepo = _carRepository.GetCarsForUser(userId);
+                var carsFromRepo = _carRepository.GetCarsForUser(userId,journeys);
 
                 var cars = Mapper.Map<IEnumerable<CarDto>>(carsFromRepo);
 
@@ -51,7 +53,7 @@ namespace DriveTracker.Controllers
 
         [HttpGet, Route("{id}",Name ="GetCar")]
 
-        public IHttpActionResult GetCar(int userId,int id)
+        public IHttpActionResult GetCar(int userId,int id, bool journeys=false)
         {
             try
             {
@@ -60,7 +62,7 @@ namespace DriveTracker.Controllers
                     return NotFound();
                 }
 
-                var carFromRepo = _carRepository.GetCarForUser(userId,id);
+                var carFromRepo = _carRepository.GetCarForUser(userId,id,journeys);
 
                 if(carFromRepo==null)
                 {
@@ -86,6 +88,11 @@ namespace DriveTracker.Controllers
                 if(carFromBody==null)
                 {
                     return BadRequest();
+                }
+
+                if(!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
                 }
 
                 if(!_userRepository.UserExists(userId))
@@ -130,7 +137,7 @@ namespace DriveTracker.Controllers
                     return NotFound();
                 }
 
-                var car = _carRepository.GetCarForUser(userId, id);
+                var car = _carRepository.GetCarForUser(userId, id,false);
 
                 if(car ==null)
                 {
@@ -140,6 +147,13 @@ namespace DriveTracker.Controllers
                 var carForPatch = Mapper.Map<CarForUpdateDto>(car);
 
                 patchDoc.ApplyTo(carForPatch);
+
+                Validate(carForPatch); // validation after patching
+
+                if(!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
 
                 Mapper.Map(carForPatch,car);
 
@@ -170,7 +184,7 @@ namespace DriveTracker.Controllers
                     return NotFound();
                 }
 
-                var car = _carRepository.GetCarForUser(userId, id);
+                var car = _carRepository.GetCarForUser(userId, id,false);
 
                 if (car == null)
                 {

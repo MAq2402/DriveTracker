@@ -13,19 +13,29 @@ namespace DriveTracker.Entities
         {
             DateTime = DateTime.Now;
         }
+
+        [Required]
         public int Id { get; set; }
-        [Required]
+
+        [Required,MaxLength(50)]
         public string Destination { get; set; }
-        [Required]
+
+        [Required, MaxLength(50)]
         public string Start { get; set; }
-        [Required]
+
+        [Required,Range(0,40000)]
         public int Length { get; set; }
+
         [Required,ForeignKey("Car")]
         public int CarId { get; set; }
         [Required]
         public Car Car { get; set; }
         List<UserJourney> UserJourneys { get; set; } = new List<UserJourney>();
+
+        [Required]
         public DateTime DateTime { get; set; }
+
+        [Required]
         public decimal PricePerKm { get; set; }
     }
 }

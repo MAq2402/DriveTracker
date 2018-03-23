@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DriveTracker.Models;
+using DriveTracker.Models.Users;
 using DriveTracker.Repositories;
 using System;
 using System.Collections.Generic;

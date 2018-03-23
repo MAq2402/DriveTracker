@@ -13,21 +13,32 @@ namespace DriveTracker.Entities
         {
             DateTime = DateTime.Now;
         }
+
+        [Required]
         public int Id { get; set; }
-        [Required]
+
+        [Required,MaxLength(50)]
         public string Destination { get; set; }
-        [Required]
+        [Required, MaxLength(50)]
+
         public string Start { get; set; }
-        [Required]
+
+        [Required,Range(0,40000)]
         public int Length { get; set; }
+
         [Required, ForeignKey("User")]
         public int UserId { get; set; }
+
         [Required]
         public User User { get; set; }
+
         [Required,ForeignKey("Journey")]
         public int JourneyId { get; set; }
+
         [Required]
         public Journey Journey { get; set; }
+
+        [Required]
         public DateTime DateTime { get; set; }
     }
 }

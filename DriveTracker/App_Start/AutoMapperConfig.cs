@@ -13,13 +13,13 @@ namespace DriveTracker.App_Start
         {
             Mapper.Initialize(config =>
             {
-                config.CreateMap<DriveTracker.Entities.User, DriveTracker.Models.UserDto>();
+                config.CreateMap<DriveTracker.Entities.User, DriveTracker.Models.Users.UserDto>();
 
-                config.CreateMap<DriveTracker.Entities.Car, DriveTracker.Models.CarDto>();
+                config.CreateMap<DriveTracker.Entities.Car, DriveTracker.Models.Cars.CarDto>();
                 //.ForMember(dest=>dest.FuelType,opt=>opt.MapFrom(src=>Enum.GetName(typeof(FuelType),src.FuelType)));
-                config.CreateMap<DriveTracker.Models.CarForCreationDto, DriveTracker.Entities.Car>();
-                config.CreateMap<DriveTracker.Models.CarForUpdateDto, DriveTracker.Entities.Car>();
-                config.CreateMap<DriveTracker.Entities.Car,DriveTracker.Models.CarForUpdateDto>();              
+                config.CreateMap<DriveTracker.Models.Cars.CarForCreationDto, DriveTracker.Entities.Car>();
+                config.CreateMap<DriveTracker.Models.Cars.CarForUpdateDto, DriveTracker.Entities.Car>();
+                config.CreateMap<DriveTracker.Entities.Car,DriveTracker.Models.Cars.CarForUpdateDto>();              
             });
         }
             

@@ -17,18 +17,28 @@ namespace DriveTracker.Entities
         {
             DateTime = DateTime.Now;
         }
+
+        [Required]
         public int Id { get; set; }
+
+        [Required]
         public DateTime DateTime { get; set; }
+
         [ForeignKey("NotifiedUser"),Required]
         public int NotifiedUserId { get; set; }
+
         [Required]
         public User NotifiedUser { get; set; }
+
         [ForeignKey("NotifyingUser"),Required]
         public int NotifyingUserId { get; set; }
+
         [Required]
         public User NotifyingUser { get; set; }
+
         [Required]
         public string Message { get; set; }
+
         [Required]
         public NotificationType NotificationType { get; set; }
     }

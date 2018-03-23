@@ -9,8 +9,8 @@ namespace DriveTracker.Repositories
 {
     public interface ICarRepository
     {
-        IEnumerable<Car> GetCarsForUser(int userId);
-        Car GetCarForUser(int userId,int id);
+        IEnumerable<Car> GetCarsForUser(int userId,bool journeys);
+        Car GetCarForUser(int userId,int id,bool journeys);
         void AddCarForUser(int userId,Car car);
         void UpdateCar();
         void DeleteCar(Car car);
