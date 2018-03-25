@@ -14,5 +14,6 @@ namespace DriveTracker.Repositories
         void AddCarForUser(int userId,Car car);
         void UpdateCar();
         void DeleteCar(Car car);
+        bool CarExistsForUser(int userId,int carId);
     }
 }

@@ -7,7 +7,8 @@ using System.Web.Http;
 
 namespace DriveTracker.Controllers
 {
-    [RoutePrefix("api/users/{userId}/journeys")]
+    [RoutePrefix("api/users/{userId}")]
+
     public class JourneysController : ApiController
     {
 

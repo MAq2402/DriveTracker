@@ -7,12 +7,8 @@ using System.Web;
 
 namespace DriveTracker.Entities
 {
-    public class UserJourney
+    public class SingleUserJourney
     {
-        public UserJourney()
-        {
-            DateTime = DateTime.Now;
-        }
 
         [Required]
         public int Id { get; set; }
@@ -39,6 +35,7 @@ namespace DriveTracker.Entities
         public Journey Journey { get; set; }
 
         [Required]
-        public DateTime DateTime { get; set; }
+        public decimal TotalPrice { get; set; }
+
     }
 }

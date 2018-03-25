@@ -22,6 +22,8 @@ namespace DriveTracker
             container.RegisterType<IUserRepository, UserRepository>();
             container.RegisterType<ICarRepository, CarRepository>();
             container.RegisterType<IAppRepository, AppRepository>();
+            container.RegisterType<IJourneyRepository, JourneyRepository>();
+            container.RegisterType<ISingleUserJourneyRepository, SingleUserJourneyRepository>();
 
             config.DependencyResolver = new UnityResolver(container);
             // Konfiguracja i usługi składnika Web API

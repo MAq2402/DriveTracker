@@ -30,12 +30,12 @@ namespace DriveTracker.Entities
         public int CarId { get; set; }
         [Required]
         public Car Car { get; set; }
-        List<UserJourney> UserJourneys { get; set; } = new List<UserJourney>();
+        List<SingleUserJourney> UserJourneys { get; set; } = new List<SingleUserJourney>();
 
         [Required]
         public DateTime DateTime { get; set; }
 
         [Required]
-        public decimal PricePerKm { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }
