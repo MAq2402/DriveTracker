@@ -222,7 +222,6 @@
     <Compile Include="Controllers\JourneysController.cs" />
     <Compile Include="Controllers\SingleUserJourneysController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DbContexts\AppDbContext.cs" />
     <Compile Include="Entities\Balance.cs" />
     <Compile Include="Entities\Car.cs" />
@@ -234,43 +233,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803041443172_04.03.2018.cs" />
-    <Compile Include="Migrations\201803041443172_04.03.2018.Designer.cs">
-      <DependentUpon>201803041443172_04.03.2018.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803111029257_11.03.2018.cs" />
-    <Compile Include="Migrations\201803111029257_11.03.2018.Designer.cs">
-      <DependentUpon>201803111029257_11.03.2018.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803112136184_11.03.2018V3.cs" />
-    <Compile Include="Migrations\201803112136184_11.03.2018V3.Designer.cs">
-      <DependentUpon>201803112136184_11.03.2018V3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803112213009_11.03.2018v4.cs" />
-    <Compile Include="Migrations\201803112213009_11.03.2018v4.Designer.cs">
-      <DependentUpon>201803112213009_11.03.2018v4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803211040267_21.03.2018.cs" />
-    <Compile Include="Migrations\201803211040267_21.03.2018.Designer.cs">
-      <DependentUpon>201803211040267_21.03.2018.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803231126296_23.03.2018.cs" />
-    <Compile Include="Migrations\201803231126296_23.03.2018.Designer.cs">
-      <DependentUpon>201803231126296_23.03.2018.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803251648062_25.03.2018.cs" />
-    <Compile Include="Migrations\201803251648062_25.03.2018.Designer.cs">
-      <DependentUpon>201803251648062_25.03.2018.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803251724524_25.03.2018V%40.cs" />
-    <Compile Include="Migrations\201803251724524_25.03.2018V%40.Designer.cs">
-      <DependentUpon>201803251724524_25.03.2018V%40.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cars\CarDto.cs" />
     <Compile Include="Models\Cars\CarForCreationDto.cs" />
     <Compile Include="Models\Cars\CarForUpdateDto.cs" />
     <Compile Include="Models\Journeys\JourneyDto.cs" />
+    <Compile Include="Models\Journeys\JourneyForCreationDto.cs" />
     <Compile Include="Models\SingleUserJourneys\SingleUserJourneyDto.cs" />
     <Compile Include="Models\Users\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -284,6 +252,8 @@
     <Compile Include="Repositories\JourneyRepository.cs" />
     <Compile Include="Repositories\SingleUserJourneyRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Services\IJourneyService.cs" />
+    <Compile Include="Services\JourneyService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -394,32 +364,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803041443172_04.03.2018.resx">
-      <DependentUpon>201803041443172_04.03.2018.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803111029257_11.03.2018.resx">
-      <DependentUpon>201803111029257_11.03.2018.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803112136184_11.03.2018V3.resx">
-      <DependentUpon>201803112136184_11.03.2018V3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803112213009_11.03.2018v4.resx">
-      <DependentUpon>201803112213009_11.03.2018v4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803211040267_21.03.2018.resx">
-      <DependentUpon>201803211040267_21.03.2018.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803231126296_23.03.2018.resx">
-      <DependentUpon>201803231126296_23.03.2018.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803251648062_25.03.2018.resx">
-      <DependentUpon>201803251648062_25.03.2018.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803251724524_25.03.2018V%40.resx">
-      <DependentUpon>201803251724524_25.03.2018V%40.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -30,7 +30,13 @@ namespace DriveTracker.Entities
         public int CarId { get; set; }
         [Required]
         public Car Car { get; set; }
-        List<SingleUserJourney> UserJourneys { get; set; } = new List<SingleUserJourney>();
+        public List<SingleUserJourney> SingleUserJourneys { get; set; } = new List<SingleUserJourney>();
+
+        [Required, ForeignKey("User")]
+        public int UserId { get; set; }
+
+        [Required]
+        public User User { get; set; }
 
         [Required]
         public DateTime DateTime { get; set; }

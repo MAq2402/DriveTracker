@@ -19,7 +19,12 @@ namespace DriveTracker.App_Start
                 //.ForMember(dest=>dest.FuelType,opt=>opt.MapFrom(src=>Enum.GetName(typeof(FuelType),src.FuelType)));
                 config.CreateMap<DriveTracker.Models.Cars.CarForCreationDto, DriveTracker.Entities.Car>();
                 config.CreateMap<DriveTracker.Models.Cars.CarForUpdateDto, DriveTracker.Entities.Car>();
-                config.CreateMap<DriveTracker.Entities.Car,DriveTracker.Models.Cars.CarForUpdateDto>();              
+                config.CreateMap<DriveTracker.Entities.Car,DriveTracker.Models.Cars.CarForUpdateDto>();
+
+                config.CreateMap<DriveTracker.Entities.Journey, DriveTracker.Models.Journeys.JourneyDto>();
+                config.CreateMap<DriveTracker.Models.Journeys.JourneyForCreationDto, DriveTracker.Entities.Journey>();
+            
+                config.CreateMap<DriveTracker.Entities.SingleUserJourney, DriveTracker.Models.SingleUserJourneys.SingleUserJourneyDto>();
             });
         }
             

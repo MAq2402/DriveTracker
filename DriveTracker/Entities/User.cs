@@ -20,14 +20,17 @@ namespace DriveTracker.Entities
 
         [Required]
         public string UserName { get; set; }
-        public List<Balance> Balances { get; set; } = new List<Balance>();
+        public int BalanceId { get; set; }
+
+        [Key, ForeignKey("BalanceId")]
+        public Balance Balance { get; set; }
 
         [InverseProperty("Receiver")]
         public List<Payment> ReceivedPayments { get; set; } = new List<Payment>();
 
         [InverseProperty("Payer")]
         public List<Payment> PayedPayments { get; set; } = new List<Payment>();
-        public List<SingleUserJourney> UserJourneys { get; set; } = new List<SingleUserJourney>();
+        public List<SingleUserJourney> SingleUserJourneys { get; set; } = new List<SingleUserJourney>();
         public List<Car> Cars { get; set; } =  new List<Car>();
 
         [InverseProperty("NotifiedUser")]
@@ -35,5 +38,6 @@ namespace DriveTracker.Entities
 
         [InverseProperty("NotifyingUser")]
         public List<Notification> SentNotifications { get; set; } = new List<Notification>();
+        public List<Journey> Journeys { get; set; } = new List<Journey>();
     }
 }

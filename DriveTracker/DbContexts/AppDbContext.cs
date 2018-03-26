@@ -16,6 +16,14 @@ namespace DriveTracker.DbContexts
         public DbSet<User> Users { get; set; }
         public DbSet<SingleUserJourney> UserJourneys { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // modelBuilder.Entity<Balance>().HasRequired(b => b.User).WithOptional(u => u.Balance);
+            modelBuilder.Entity<User>().HasOptional(u => u.Balance).WithRequired(b => b.User);
+             //modelBuilder.Entity<Balance>().HasOptional(b => b.User).WithRequired(u => u.Balance);
+        }
 
     }
 }

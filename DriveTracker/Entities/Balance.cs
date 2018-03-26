@@ -9,51 +9,34 @@ using System.Web;
 namespace DriveTracker.Entities
 {
 
-    public enum Month
-    {
-        January = 1,
-        February,
-        March,
-        April,
-        May,
-        June,
-        July,
-        August,
-        September,
-        October,
-        November,
-        December
-    }
     public class Balance
     {
         public Balance()
         {
-            Year = DateTime.Now.Year;
-            Month = (Month)DateTime.Now.Month;
+            ToPay = 0;
+            ToReceive = 0;
+            Payed = 0;
+            Received = 0;
         }
 
-        [Required]
+        [Key]
         public int Id { get; set; }
 
-        [Required]
+        //[Required]
         public decimal ToPay { get; set; }
 
-        [Required]
+        //[Required]
         public decimal ToReceive { get; set; }
 
-        [Required]
+        //[Required]
         public decimal Payed { get; set; }
 
-        [Required]
+        //[Required]
         public decimal Received { get; set; }
 
-        [Required]
-        public int Year { get; set; }
-
-        [Required]
-        public Month Month{ get; set; }
-        [Required,ForeignKey("User")]
+        [Required,Key,ForeignKey("User")]
         public int UserId { get; set; }
+
         [Required]
         public User User { get; set; }
     }

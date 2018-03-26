@@ -23,13 +23,9 @@ namespace DriveTracker.Repositories
             _context.Users.FirstOrDefault(u => u.Id == userId).Cars.Add(car);
         }
 
-        public bool CarExistsForUser(int userId, int carId)
+        public bool CarExistsForUser(int userId, int id)
         {
-            if (_context.Cars.FirstOrDefault(c => c.Id == carId && c.UserId == userId) == null)
-            {
-                return false;
-            }
-            return true;
+            return _context.Cars.Any(c => c.Id == id && c.UserId == userId);
         }
 
         public void DeleteCar(Car car)

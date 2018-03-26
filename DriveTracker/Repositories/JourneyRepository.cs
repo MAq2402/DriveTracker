@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using DriveTracker.DbContexts;
 using DriveTracker.Entities;
+using System.Data.Entity;
 
 namespace DriveTracker.Repositories
 {
@@ -30,29 +31,39 @@ namespace DriveTracker.Repositories
             throw new NotImplementedException();
         }
 
-        public Journey GetJourneyForUser(int userId, int id)
+        public Journey GetJourneyForUser(int userId, int id, bool singleUserJourney)
         {
             throw new NotImplementedException();
         }
 
-        public Journey GetJourneyForUserAndCar(int userId, int carId, int id)
+        public Journey GetJourneyForUserAndCar(int userId, int carId, int id, bool singleUserJourney)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<Journey> GetJourneysForUser(int userId)
+        public IQueryable<Journey> GetJourneysForUser(int userId, bool singleUserJourney)
         {
-            throw new NotImplementedException();
+            if (singleUserJourney)
+            {
+                return _context.Journeys.Where(j => j.UserId == userId)
+                                        .Include(j => j.SingleUserJourneys);
+            }
+            return _context.Journeys.Where(j => j.UserId == userId);
         }
 
-        public IQueryable<Journey> GetJourneysForUserAndCar(int userId, int carId)
+        public IQueryable<Journey> GetJourneysForUserAndCar(int userId, int carId, bool singleUserJourney)
         {
-            throw new NotImplementedException();
+            if(singleUserJourney)
+            {
+                return _context.Journeys.Where(j => j.UserId == userId && j.CarId == carId)
+                                        .Include(j => j.SingleUserJourneys);
+            }
+            return _context.Journeys.Where(j => j.UserId == userId && j.CarId == carId);
         }
 
         public bool JourneyExistsForUser(int userId, int id)
         {
-            throw new NotImplementedException();
+            return _context.Journeys.Any(j => j.Id == id && j.UserId == userId);
         }
     }
 }
