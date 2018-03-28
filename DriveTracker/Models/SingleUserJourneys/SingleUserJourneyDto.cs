@@ -19,6 +19,7 @@ namespace DriveTracker.Models.SingleUserJourneys
         public int UserId { get; set; }
 
         public int JourneyId { get; set; }
+
         public decimal TotalPrice { get; set; }
 
     }

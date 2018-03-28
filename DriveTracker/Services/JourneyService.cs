@@ -8,9 +8,16 @@ namespace DriveTracker.Services
 {
     public class JourneyService : IJourneyService
     {
-        public decimal CalculateTotalPrice(Journey journey, decimal priceForLiter)
+        //Counts total price for journey and single user journey
+        public void GiveTotalPrice(Journey journey, double priceForLiter)
         {
-            throw new NotImplementedException();
+            journey.TotalPrice = Convert.ToDecimal((journey.Car.FuelConsumption100km * journey.Length * priceForLiter / 100));
+
+            foreach(var item in journey.SingleUserJourneys)
+            {
+               
+
+            }
         }
     }
 }

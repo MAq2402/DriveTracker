@@ -9,7 +9,7 @@ namespace DriveTracker.Entities
 {
     public class User
     {
-        [Required]
+        [Required,Key]
         public int Id { get; set; }
 
         [Required]
@@ -20,10 +20,6 @@ namespace DriveTracker.Entities
 
         [Required]
         public string UserName { get; set; }
-        public int BalanceId { get; set; }
-
-        [Key, ForeignKey("BalanceId")]
-        public Balance Balance { get; set; }
 
         [InverseProperty("Receiver")]
         public List<Payment> ReceivedPayments { get; set; } = new List<Payment>();
@@ -39,5 +35,9 @@ namespace DriveTracker.Entities
         [InverseProperty("NotifyingUser")]
         public List<Notification> SentNotifications { get; set; } = new List<Notification>();
         public List<Journey> Journeys { get; set; } = new List<Journey>();
+        public decimal ToPay { get; set; }
+        public decimal ToReceive { get; set; }
+        public decimal Payed { get; set; }
+        public decimal Received { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using DriveTracker.App_Start;
 using DriveTracker.DbContexts;
 using DriveTracker.Repositories;
+using DriveTracker.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -24,6 +25,11 @@ namespace DriveTracker
             container.RegisterType<IAppRepository, AppRepository>();
             container.RegisterType<IJourneyRepository, JourneyRepository>();
             container.RegisterType<ISingleUserJourneyRepository, SingleUserJourneyRepository>();
+            container.RegisterType<IPaymentRepository, PaymentRepository>();
+
+            container.RegisterType<IPaymentService, PaymentService>();
+            container.RegisterType<IJourneyService, JourneyService>();
+            
 
             config.DependencyResolver = new UnityResolver(container);
             // Konfiguracja i usługi składnika Web API

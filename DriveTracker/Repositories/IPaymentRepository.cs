@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DriveTracker.Services
+namespace DriveTracker.Repositories
 {
-    public interface IJourneyService
+    public interface IPaymentRepository
     {
-        void GiveTotalPrice(Journey journey, double priceForLiter);
+        void AddPayments(IEnumerable<Payment> payments);
     }
 }

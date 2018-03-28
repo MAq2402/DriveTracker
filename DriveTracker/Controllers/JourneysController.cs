@@ -2,6 +2,7 @@
 using DriveTracker.Entities;
 using DriveTracker.Models.Journeys;
 using DriveTracker.Repositories;
+using DriveTracker.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +19,14 @@ namespace DriveTracker.Controllers
         private IJourneyRepository _journeyRepository;
         private IUserRepository _userRepository;
         private ICarRepository _carRepository;
+        private IJourneyService _journeyService;
 
-        public JourneysController(IJourneyRepository journeyRepository,IUserRepository userRepository,ICarRepository carRepository)
+        public JourneysController(IJourneyRepository journeyRepository,IUserRepository userRepository,ICarRepository carRepository,IJourneyService journeyService)
         {
             _journeyRepository = journeyRepository;
             _userRepository = userRepository;
             _carRepository = carRepository;
+            _journeyService = journeyService;
 
         }
 
@@ -70,37 +73,42 @@ namespace DriveTracker.Controllers
             
         }
 
-        /*[HttpPost,Route("cars/{carId}/journeys")]
-        //send Notification to users, change balance for users, create payments,Calculate Price,
-        public IHttpActionResult CreateJourney([FromBody]JourneyForCreationDto journeyFromBody,int userId,int carId)
-        {
-            try
-            {
-                if (journeyFromBody == null)
-                {
-                    return BadRequest();
-                }
+        //[HttpPost,Route("cars/{carId}/journeys")]
+        //send notification to users, create payments,calculate price,
+        //public ihttpactionresult createjourney([frombody]journeyforcreationdto journeyfrombody, int userid, int carid)
+        //{
+        //    try
+        //    {
+        //        if (journeyfrombody == null)
+        //        {
+        //            return badrequest();
+        //        }
 
-                if (!_carRepository.CarExistsForUser(userId, carId))
-                {
-                    return NotFound();
-                }
+        //        if (!_carrepository.carexistsforuser(userid, carid))
+        //        {
+        //            return notfound();
+        //        }
 
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
+        //        if (!modelstate.isvalid)
+        //        {
+        //            return badrequest(modelstate);
+        //        }
 
-                var journey = Mapper.Map<Journey>(journeyFromBody);
+        //        var journey = mapper.map<journey>(journeyfrombody);
 
-                _journeyRepository.AddJourneyForUserAndCar(userId, carId, journey);
+        //        _journeyservice.givetotalprice(journey, (double)journeyfrombody.priceforliter);
+        //        //paymentservice wygeneruje paymenty
+        //        //user service wyedytuje pola zwiazane z platnosciami
+        //        //notification service wysle notyfikacje albo repozytorium
 
-            }
-            catch(Exception)
-            {
-                return InternalServerError();
-            }
-            
-        }*/
+        //        _journeyrepository.addjourneyforuserandcar(userid, carid, journey);
+
+        //    }
+        //    catch (exception)
+        //    {
+        //        return internalservererror();
+        //    }
+
+        //}
     }
 }

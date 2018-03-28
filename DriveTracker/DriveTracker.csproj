@@ -223,7 +223,6 @@
     <Compile Include="Controllers\SingleUserJourneysController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DbContexts\AppDbContext.cs" />
-    <Compile Include="Entities\Balance.cs" />
     <Compile Include="Entities\Car.cs" />
     <Compile Include="Entities\Journey.cs" />
     <Compile Include="Entities\Notification.cs" />
@@ -232,6 +231,14 @@
     <Compile Include="Entities\SingleUserJourney.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803281648467_28.03.2018V9.cs" />
+    <Compile Include="Migrations\201803281648467_28.03.2018V9.Designer.cs">
+      <DependentUpon>201803281648467_28.03.2018V9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803281827109_28.03.2018v10.cs" />
+    <Compile Include="Migrations\201803281827109_28.03.2018v10.Designer.cs">
+      <DependentUpon>201803281827109_28.03.2018v10.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cars\CarDto.cs" />
@@ -247,13 +254,17 @@
     <Compile Include="Repositories\IAppRepository.cs" />
     <Compile Include="Repositories\ICarRepository.cs" />
     <Compile Include="Repositories\IJourneyRepository.cs" />
+    <Compile Include="Repositories\IPaymentRepository.cs" />
     <Compile Include="Repositories\ISingleUserJourneyRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\JourneyRepository.cs" />
+    <Compile Include="Repositories\PaymentRepository.cs" />
     <Compile Include="Repositories\SingleUserJourneyRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Services\IJourneyService.cs" />
+    <Compile Include="Services\IPaymentService.cs" />
     <Compile Include="Services\JourneyService.cs" />
+    <Compile Include="Services\PaymentService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -364,6 +375,14 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201803281648467_28.03.2018V9.resx">
+      <DependentUpon>201803281648467_28.03.2018V9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803281827109_28.03.2018v10.resx">
+      <DependentUpon>201803281827109_28.03.2018v10.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
