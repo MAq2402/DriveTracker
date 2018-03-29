@@ -46,7 +46,7 @@ namespace DriveTracker.Repositories
             if (singleUserJourney)
             {
                 return _context.Journeys.Where(j => j.UserId == userId)
-                                        .Include(j => j.SingleUserJourneys);
+                                        .Include(j => j.PassengerRoutes);
             }
             return _context.Journeys.Where(j => j.UserId == userId);
         }
@@ -56,7 +56,7 @@ namespace DriveTracker.Repositories
             if(singleUserJourney)
             {
                 return _context.Journeys.Where(j => j.UserId == userId && j.CarId == carId)
-                                        .Include(j => j.SingleUserJourneys);
+                                        .Include(j => j.PassengerRoutes);
             }
             return _context.Journeys.Where(j => j.UserId == userId && j.CarId == carId);
         }

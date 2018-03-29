@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveTracker", "DriveTracker\DriveTracker.csproj", "{C6585AB0-F415-4767-B560-63BFE1923A38}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriveTracker.Tests", "DriveTracker.Tests\DriveTracker.Tests.csproj", "{F1848369-551D-443A-9994-5851B433904A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C6585AB0-F415-4767-B560-63BFE1923A38} = {C6585AB0-F415-4767-B560-63BFE1923A38}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

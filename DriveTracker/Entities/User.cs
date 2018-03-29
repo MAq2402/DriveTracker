@@ -26,7 +26,7 @@ namespace DriveTracker.Entities
 
         [InverseProperty("Payer")]
         public List<Payment> PayedPayments { get; set; } = new List<Payment>();
-        public List<SingleUserJourney> SingleUserJourneys { get; set; } = new List<SingleUserJourney>();
+        public List<PassengerRoute> SingleUserJourneys { get; set; } = new List<PassengerRoute>();
         public List<Car> Cars { get; set; } =  new List<Car>();
 
         [InverseProperty("NotifiedUser")]

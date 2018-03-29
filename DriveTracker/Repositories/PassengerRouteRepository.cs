@@ -6,9 +6,9 @@ using DriveTracker.Entities;
 
 namespace DriveTracker.Repositories
 {
-    public class SingleUserJourneyRepository : ISingleUserJourneyRepository
+    public class PassengerRouteRepository : IPassengerRouteRepository
     {
-        public void AddSingleUserJourneyForUserAndJourney(int userId, int journeyId, SingleUserJourney singleUserJourney)
+        public void AddSingleUserJourneyForUserAndJourney(int userId, int journeyId, PassengerRoute singleUserJourney)
         {
             throw new NotImplementedException();
         }
@@ -18,12 +18,12 @@ namespace DriveTracker.Repositories
             throw new NotImplementedException();
         }
 
-        public SingleUserJourney GetSingleUserJourneyForUserAndJourney(int userId, int journeyId, int id)
+        public PassengerRoute GetSingleUserJourneyForUserAndJourney(int userId, int journeyId, int id)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<SingleUserJourney> GetSingleUserJourneysForUserAndJourney(int userId, int journeyId)
+        public IQueryable<PassengerRoute> GetSingleUserJourneysForUserAndJourney(int userId, int journeyId)
         {
             throw new NotImplementedException();
         }

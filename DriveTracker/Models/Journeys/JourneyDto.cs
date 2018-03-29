@@ -21,7 +21,7 @@ namespace DriveTracker.Models.Journeys
         public int CarId { get; set; }
         public int UserId { get; set; }
 
-        List<SingleUserJourneyDto> UserJourneys { get; set; } = new List<SingleUserJourneyDto>();
+        List<PassengerRouteDto> PassengerRoutes { get; set; } = new List<PassengerRouteDto>();
 
         public DateTime DateTime { get; set; }
 

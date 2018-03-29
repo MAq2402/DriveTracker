@@ -24,7 +24,7 @@ namespace DriveTracker
             container.RegisterType<ICarRepository, CarRepository>();
             container.RegisterType<IAppRepository, AppRepository>();
             container.RegisterType<IJourneyRepository, JourneyRepository>();
-            container.RegisterType<ISingleUserJourneyRepository, SingleUserJourneyRepository>();
+            container.RegisterType<IPassengerRouteRepository, PassengerRouteRepository>();
             container.RegisterType<IPaymentRepository, PaymentRepository>();
 
             container.RegisterType<IPaymentService, PaymentService>();

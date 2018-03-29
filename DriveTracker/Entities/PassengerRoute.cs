@@ -7,7 +7,7 @@ using System.Web;
 
 namespace DriveTracker.Entities
 {
-    public class SingleUserJourney
+    public class PassengerRoute
     {
 
         [Required]

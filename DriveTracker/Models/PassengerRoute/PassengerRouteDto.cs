@@ -6,7 +6,7 @@ using System.Web;
 
 namespace DriveTracker.Models.SingleUserJourneys
 {
-    public class SingleUserJourneyDto
+    public class PassengerRouteDto
     {
         public int Id { get; set; }
 

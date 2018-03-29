@@ -9,11 +9,11 @@ using System.Web.Http;
 namespace DriveTracker.Controllers
 {
     [RoutePrefix("api/users/{userId}/journeys/{journeyId}/singleUserJourneys")]
-    public class SingleUserJourneysController : ApiController
+    public class PassengerRoutesController : ApiController
     {
-        private ISingleUserJourneyRepository _singleUserJourneyRepository;
+        private IPassengerRouteRepository _singleUserJourneyRepository;
 
-        public SingleUserJourneysController(ISingleUserJourneyRepository singleUserJourneyRepository)
+        public PassengerRoutesController(IPassengerRouteRepository singleUserJourneyRepository)
         {
             _singleUserJourneyRepository = singleUserJourneyRepository;
         }
