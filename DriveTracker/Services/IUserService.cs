@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace DriveTracker.Services
 {
-    public interface IPaymentService
+    public interface IUserService
     {
-        IEnumerable<Payment> GeneratePayments(Journey journey);
+        void EditUserPaymentStatistics(IEnumerable<Payment> payments);
     }
+
 }

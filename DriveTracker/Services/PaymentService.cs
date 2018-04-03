@@ -16,9 +16,23 @@ namespace DriveTracker.Services
             _paymentRepository = paymentRepository;
         }
 
-        public void GeneratePayments(Journey journey)
+        public IEnumerable<Payment> GeneratePayments(Journey journey)
         {
-            throw new NotImplementedException();
+            var payments = new List<Payment>();
+            var routes = journey.PassengerRoutes;
+            foreach(var route in routes)
+            {
+                var payment = new Payment
+                {
+                    Receiver = journey.User,
+                    Payer = route.User,
+                    Journey = journey,
+                    Amount = route.TotalPrice,
+                };
+                payments.Add(payment);
+            }
+            return payments;
         }
+
     }
 }

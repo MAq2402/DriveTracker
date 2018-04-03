@@ -30,9 +30,9 @@ namespace DriveTracker.Services
 
                 var listOfRoutesWithSameLength = listOfRoutes.Skip(i).TakeWhile(pr => pr.Length == currentLength).ToList();
 
-                currentLength -= previousLength;
+                currentLength -= previousLength; // subtructing from currentLength to calculate currentCost
 
-                currentCost += Convert.ToDecimal((fuelConsumption100km * currentLength * priceForLiter) / (100 * (numberOfPassengers - i + 1)));
+                currentCost += Convert.ToDecimal((fuelConsumption100km * currentLength * priceForLiter) / (100 * (numberOfPassengers - i + 1))); //+1 becouse of user who creates journey
 
                 foreach(var route in listOfRoutesWithSameLength)
                 {

@@ -263,8 +263,10 @@
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Services\IJourneyService.cs" />
     <Compile Include="Services\IPaymentService.cs" />
+    <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\JourneyService.cs" />
     <Compile Include="Services\PaymentService.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

@@ -18,7 +18,9 @@ namespace DriveTracker.Repositories
         }
         public void AddJourneyForUserAndCar(int userId, int carId,Journey journey)
         {
-            throw new NotImplementedException();
+            _context.Users.FirstOrDefault(u => u.Id == userId)
+                    .Cars.FirstOrDefault(c => c.Id == carId)
+                    .Journeys.Add(journey);
         }
 
         public void DeleteJourneyForUser(int userId, int id)

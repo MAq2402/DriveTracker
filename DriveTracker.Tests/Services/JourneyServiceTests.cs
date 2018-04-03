@@ -155,5 +155,58 @@ namespace DriveTracker.Tests.Services
             Assert.AreEqual(expected2, actual2);
             Assert.AreEqual(expected3, actual3);
         }
+
+        [TestMethod]
+        public void GiveTotalPricesTest_PassengerRouteTotalPrice_5()
+        {
+            //Arrange
+            var journeyService = new JourneyService();
+            var journey = new Journey
+            {
+                Car = new Car
+                {
+                    FuelConsumption100km = 10
+                },
+                Length = 100,
+                PassengerRoutes = new List<PassengerRoute>
+                {
+                    new PassengerRoute
+                    {
+                        Length = 75,
+                    },
+                    new PassengerRoute
+                    {
+                        Length = 50,
+                    },
+                    new PassengerRoute
+                    {
+                        Length = 25,
+                    },
+                     new PassengerRoute
+                    {
+                        Length = 10,
+                    }
+                }
+
+            };
+            var priceForLiter = 2;
+
+            //Act
+            journeyService.GiveTotalPrices(journey, priceForLiter);
+            var expected1 = 5.32m;
+            var expected2 = 2.82m;
+            var expected3 = 1.15m;
+            var expected4 = 0.4m;
+            var actual1 = Decimal.Round(journey.PassengerRoutes[0].TotalPrice,2);
+            var actual2 = Decimal.Round(journey.PassengerRoutes[1].TotalPrice,2);
+            var actual3 = Decimal.Round(journey.PassengerRoutes[2].TotalPrice,2);
+            var actual4 = Decimal.Round(journey.PassengerRoutes[3].TotalPrice,2);
+
+            //Assert
+            Assert.AreEqual(expected1, actual1);
+            Assert.AreEqual(expected2, actual2);
+            Assert.AreEqual(expected3, actual3);
+            Assert.AreEqual(expected4, actual4);
+        }
     }
 }

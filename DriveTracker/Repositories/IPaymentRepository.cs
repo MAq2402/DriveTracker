@@ -9,6 +9,6 @@ namespace DriveTracker.Repositories
 {
     public interface IPaymentRepository
     {
-        void AddPayments(IEnumerable<Payment> payments);
+        void AddPayment(Payment payment);
     }
 }

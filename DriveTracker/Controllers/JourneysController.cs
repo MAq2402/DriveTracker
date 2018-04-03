@@ -20,20 +20,33 @@ namespace DriveTracker.Controllers
         private IUserRepository _userRepository;
         private ICarRepository _carRepository;
         private IJourneyService _journeyService;
+        private IPaymentService _paymentService;
+        private IAppRepository _appRepository;
+        private IUserService _userService;
 
-        public JourneysController(IJourneyRepository journeyRepository,IUserRepository userRepository,ICarRepository carRepository,IJourneyService journeyService)
+        public JourneysController(IJourneyRepository journeyRepository,
+                                  IUserRepository userRepository,
+                                  ICarRepository carRepository,
+                                  IJourneyService journeyService,
+                                  IPaymentService paymentService,
+                                  IAppRepository appRepository,
+                                  IUserService userService)
         {
             _journeyRepository = journeyRepository;
             _userRepository = userRepository;
             _carRepository = carRepository;
             _journeyService = journeyService;
+            _paymentService = paymentService;
+            _appRepository = appRepository;
+            _userService = userService;
+
 
         }
 
         [HttpGet]
         [Route("cars/{carId}/journeys")]
         [Route("journeys")]
-        public IHttpActionResult GetJourneys(int userId, bool singleUserJourney,int? carId=null)
+        public IHttpActionResult GetJourneys(int userId, bool passengerRoute,int? carId=null)
         {
             try
             {
@@ -45,7 +58,7 @@ namespace DriveTracker.Controllers
                         return NotFound();
                     }
 
-                    var journeys = _journeyRepository.GetJourneysForUser(userId,singleUserJourney);
+                    var journeys = _journeyRepository.GetJourneysForUser(userId,passengerRoute);
 
                     Mapper.Map<IEnumerable<JourneyDto>>(journeys);
 
@@ -58,7 +71,7 @@ namespace DriveTracker.Controllers
                         return NotFound();
                     }
 
-                    var journeys = _journeyRepository.GetJourneysForUserAndCar(userId, (int)carId, singleUserJourney);
+                    var journeys = _journeyRepository.GetJourneysForUserAndCar(userId, (int)carId, passengerRoute);
 
                     Mapper.Map<IEnumerable<JourneyDto>>(journeys);
 
@@ -73,42 +86,109 @@ namespace DriveTracker.Controllers
             
         }
 
-        //[HttpPost,Route("cars/{carId}/journeys")]
-        //send notification to users, create payments,calculate price,
-        //public ihttpactionresult createjourney([frombody]journeyforcreationdto journeyfrombody, int userid, int carid)
-        //{
-        //    try
-        //    {
-        //        if (journeyfrombody == null)
-        //        {
-        //            return badrequest();
-        //        }
+        [HttpGet]
+        [Route("cars/{carId}/journeys/{id}",Name ="GetJourneyForUserAndCar")]
+        [Route("journeys/{id}")]
+        public IHttpActionResult GetJourney(int userId, int id, bool passangerRoutes, int? carId = null)
+        {
+            try
+            {
 
-        //        if (!_carrepository.carexistsforuser(userid, carid))
-        //        {
-        //            return notfound();
-        //        }
+                if (carId == null)
+                {
+                    if (!_userRepository.UserExists(userId))
+                    {
+                        return NotFound();
+                    }
 
-        //        if (!modelstate.isvalid)
-        //        {
-        //            return badrequest(modelstate);
-        //        }
+                    var journey = _journeyRepository.GetJourneyForUser(userId,id, passangerRoutes);
 
-        //        var journey = mapper.map<journey>(journeyfrombody);
+                    if(journey==null)
+                    {
+                        return NotFound();
+                    }
 
-        //        _journeyservice.givetotalprice(journey, (double)journeyfrombody.priceforliter);
-        //        //paymentservice wygeneruje paymenty
-        //        //user service wyedytuje pola zwiazane z platnosciami
-        //        //notification service wysle notyfikacje albo repozytorium
+                    Mapper.Map<JourneyDto>(journey);
 
-        //        _journeyrepository.addjourneyforuserandcar(userid, carid, journey);
+                    return Ok(journey);
+                }
+                else
+                {
+                    if (!_carRepository.CarExistsForUser(userId, (int)carId))
+                    {
+                        return NotFound();
+                    }
 
-        //    }
-        //    catch (exception)
-        //    {
-        //        return internalservererror();
-        //    }
+                    var journey = _journeyRepository.GetJourneyForUserAndCar(userId, (int)carId, id, passangerRoutes);
 
-        //}
+                    Mapper.Map<JourneyDto>(journey);
+
+                    if(journey==null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(journey);
+                }
+
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
+
+        }
+
+        [HttpPost, Route("cars/{carId}/journeys")]
+        //send notification to users
+        public IHttpActionResult CreateJourney([FromBody]JourneyForCreationDto JourneyFromBody, int userId, int carId)
+        {
+            try
+            {
+                if (JourneyFromBody == null)
+                {
+                    return BadRequest();
+                }
+
+                if (!_carRepository.CarExistsForUser(userId, carId))
+                {
+                    return NotFound();
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var journey = Mapper.Map<Journey>(JourneyFromBody);
+
+                _journeyService.GiveTotalPrices(journey, (double)JourneyFromBody.PriceForLiter);
+
+                var payments = _paymentService.GeneratePayments(journey);
+
+                _userService.EditUserPaymentStatistics(payments);
+
+                //notification service albo repozytorium wysle notyfikacje 
+
+                _journeyRepository.AddJourneyForUserAndCar(userId, carId, journey);
+
+                //_paymentService.Repository.Add....
+
+                if(!_appRepository.Commit())
+                {
+                    return InternalServerError();
+                }
+
+                var journeyToReturn = Mapper.Map<JourneyDto>(journey);
+
+                return CreatedAtRoute("GetJourneyForUserAndCar", new { userId = userId, id = journey.Id, passengerRoutes = true, carId = carId }, journeyToReturn);
+
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
+
+        }
     }
 }

@@ -29,6 +29,7 @@ namespace DriveTracker
 
             container.RegisterType<IPaymentService, PaymentService>();
             container.RegisterType<IJourneyService, JourneyService>();
+            container.RegisterType<IUserService, UserService>();
             
 
             config.DependencyResolver = new UnityResolver(container);
