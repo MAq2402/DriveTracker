@@ -16,11 +16,9 @@ namespace DriveTracker.Repositories
             _context = context;
         }
 
-        public void AddPayment(Payment payment)
+        public void AddPayments(IEnumerable<Payment> payments)
         {
-            _context.Payments.Add(payment);
+            _context.Payments.AddRange(payments);
         }
-
-
     }
 }

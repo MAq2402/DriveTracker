@@ -20,7 +20,7 @@ namespace DriveTracker.Migrations
         protected override void Seed(DriveTracker.DbContexts.AppDbContext context)
         {
 
-            var user1 = new User
+            /*var user1 = new User
             {
                 FirstName = "Micha³",
                 LastName = "Miciak",
@@ -60,14 +60,14 @@ namespace DriveTracker.Migrations
             };
             context.Cars.AddOrUpdate(c => c.Name, car);
         }
+        */
 
 
 
+            //  This method will be called after migrating to the latest version.
 
-        //  This method will be called after migrating to the latest version.
-
-        //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-        //  to avoid creating duplicate seed data.
-
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data.
+        }
     }
 }

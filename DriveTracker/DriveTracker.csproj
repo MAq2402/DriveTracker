@@ -240,12 +240,17 @@
     <Compile Include="Migrations\201803281827109_28.03.2018v10.Designer.cs">
       <DependentUpon>201803281827109_28.03.2018v10.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804031351400_03.04.2018.cs" />
+    <Compile Include="Migrations\201804031351400_03.04.2018.Designer.cs">
+      <DependentUpon>201804031351400_03.04.2018.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cars\CarDto.cs" />
     <Compile Include="Models\Cars\CarForCreationDto.cs" />
     <Compile Include="Models\Cars\CarForUpdateDto.cs" />
     <Compile Include="Models\Journeys\JourneyDto.cs" />
     <Compile Include="Models\Journeys\JourneyForCreationDto.cs" />
+    <Compile Include="Models\PassengerRoute\PassangerRouteForCreationDto.cs" />
     <Compile Include="Models\PassengerRoute\PassengerRouteDto.cs" />
     <Compile Include="Models\Users\UserDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -384,6 +389,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803281827109_28.03.2018v10.resx">
       <DependentUpon>201803281827109_28.03.2018v10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804031351400_03.04.2018.resx">
+      <DependentUpon>201804031351400_03.04.2018.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

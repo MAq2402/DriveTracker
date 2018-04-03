@@ -9,6 +9,6 @@ namespace DriveTracker.Services
 {
     public interface IJourneyService
     {
-        void GiveTotalPrices(Journey journey, double priceForLiter);
+        void GiveTotalPrices(Journey journey, double priceForLiter, double fuelConsumption100km);
     }
 }

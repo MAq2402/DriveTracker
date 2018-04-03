@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DriveTracker.Models.PassengerRoute;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,15 +18,15 @@ namespace DriveTracker.Models.Journeys
         [Required,Range(1,400000)]
         public int Length { get; set; }
 
-        [Required]
-        public int CarId { get; set; }
+        //[Required]
+        //public int CarId { get; set; }
 
-        [Required]
-        public int UserId { get; set; }
-
-        //List<SingleUserJourneyForCreationDto> UserJourneys { get; set; } = new List<SingleUserJourneyForCreationDto>();
+        //[Required]
+        //public int UserId { get; set; }
 
         [Required,Range(0,200)]
         public decimal PriceForLiter { get; set; }
+        PassangerRouteForCreationDto[] Routes { get; set; } = new PassangerRouteForCreationDto[10];
+        //public PassangerRouteForCreationDto Routes { get; set; }
     }
 }

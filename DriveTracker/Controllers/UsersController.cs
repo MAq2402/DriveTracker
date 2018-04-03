@@ -30,7 +30,7 @@ namespace DriveTracker.Controllers
 
                 return Ok(users);
             }
-            catch(Exception)
+            catch(Exception e)
             {
                 return InternalServerError();
             }

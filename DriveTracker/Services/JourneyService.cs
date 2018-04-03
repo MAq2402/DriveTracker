@@ -8,9 +8,8 @@ namespace DriveTracker.Services
 {
     public class JourneyService : IJourneyService
     {
-        public void GiveTotalPrices(Journey journey, double priceForLiter)
+        public void GiveTotalPrices(Journey journey, double priceForLiter,double fuelConsumption100km)
         {
-            var fuelConsumption100km = journey.Car.FuelConsumption100km;
 
             journey.TotalPrice = Convert.ToDecimal(fuelConsumption100km * journey.Length * priceForLiter / 100);
 

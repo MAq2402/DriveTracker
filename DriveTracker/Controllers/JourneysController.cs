@@ -23,6 +23,7 @@ namespace DriveTracker.Controllers
         private IPaymentService _paymentService;
         private IAppRepository _appRepository;
         private IUserService _userService;
+        private IPaymentRepository _paymentRepository;
 
         public JourneysController(IJourneyRepository journeyRepository,
                                   IUserRepository userRepository,
@@ -30,7 +31,8 @@ namespace DriveTracker.Controllers
                                   IJourneyService journeyService,
                                   IPaymentService paymentService,
                                   IAppRepository appRepository,
-                                  IUserService userService)
+                                  IUserService userService,
+                                  IPaymentRepository paymentRepository)
         {
             _journeyRepository = journeyRepository;
             _userRepository = userRepository;
@@ -39,6 +41,7 @@ namespace DriveTracker.Controllers
             _paymentService = paymentService;
             _appRepository = appRepository;
             _userService = userService;
+            _paymentRepository = paymentRepository;
 
 
         }
@@ -150,7 +153,14 @@ namespace DriveTracker.Controllers
                     return BadRequest();
                 }
 
-                if (!_carRepository.CarExistsForUser(userId, carId))
+                var car = _carRepository.GetCarForUser(userId, carId, false);
+
+                //if (!_carRepository.CarExistsForUser(userId, carId))
+                //{
+                //    return NotFound();
+                //}
+
+                if(car==null)
                 {
                     return NotFound();
                 }
@@ -162,7 +172,7 @@ namespace DriveTracker.Controllers
 
                 var journey = Mapper.Map<Journey>(JourneyFromBody);
 
-                _journeyService.GiveTotalPrices(journey, (double)JourneyFromBody.PriceForLiter);
+                _journeyService.GiveTotalPrices(journey, (double)JourneyFromBody.PriceForLiter,car.FuelConsumption100km);
 
                 var payments = _paymentService.GeneratePayments(journey);
 
@@ -172,7 +182,7 @@ namespace DriveTracker.Controllers
 
                 _journeyRepository.AddJourneyForUserAndCar(userId, carId, journey);
 
-                //_paymentService.Repository.Add....
+                _paymentRepository.AddPayments(payments);
 
                 if(!_appRepository.Commit())
                 {
@@ -184,7 +194,7 @@ namespace DriveTracker.Controllers
                 return CreatedAtRoute("GetJourneyForUserAndCar", new { userId = userId, id = journey.Id, passengerRoutes = true, carId = carId }, journeyToReturn);
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return InternalServerError();
             }
