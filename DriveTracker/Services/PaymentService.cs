@@ -16,7 +16,7 @@ namespace DriveTracker.Services
             _paymentRepository = paymentRepository;
         }
 
-        public IEnumerable<Payment> GeneratePayments(Journey journey)
+        public IEnumerable<Payment> GeneratePayments(Journey journey, int journeyUserId)
         {
             var payments = new List<Payment>();
             var routes = journey.PassengerRoutes;
@@ -24,8 +24,8 @@ namespace DriveTracker.Services
             {
                 var payment = new Payment
                 {
-                    Receiver = journey.User,
-                    Payer = route.User,
+                    ReceiverId = journeyUserId,
+                    PayerId = route.UserId,
                     Journey = journey,
                     Amount = route.TotalPrice,
                 };

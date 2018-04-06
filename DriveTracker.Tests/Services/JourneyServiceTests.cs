@@ -16,17 +16,13 @@ namespace DriveTracker.Tests.Services
             var journeyService = new JourneyService();
             var journey = new Journey
             {
-                Car = new Car
-                {
-                    FuelConsumption100km = 10
-                },
                 Length = 100
-
             };
             var priceForLiter = 2;
-
+            var fuelConsumption100km = 10;
             //Act
-            journeyService.GiveTotalPrices(journey, priceForLiter);
+            journeyService.GiveTotalPrices(journey, priceForLiter,fuelConsumption100km);
+
             var expected = 20;
             var actual = journey.TotalPrice;
 
@@ -41,10 +37,6 @@ namespace DriveTracker.Tests.Services
             var journeyService = new JourneyService();
             var journey = new Journey
             {
-                Car = new Car
-                {
-                    FuelConsumption100km = 10
-                },
                 Length = 100,
                 PassengerRoutes = new List<PassengerRoute>
                 {
@@ -56,9 +48,9 @@ namespace DriveTracker.Tests.Services
 
             };
             var priceForLiter = 2;
-
+            var fuelConsumption100km = 10;
             //Act
-            journeyService.GiveTotalPrices(journey, priceForLiter);
+            journeyService.GiveTotalPrices(journey, priceForLiter,fuelConsumption100km);
             var expected = 10;
             var actual = journey.PassengerRoutes[0].TotalPrice;
 
@@ -73,10 +65,6 @@ namespace DriveTracker.Tests.Services
             var journeyService = new JourneyService();
             var journey = new Journey
             {
-                Car = new Car
-                {
-                    FuelConsumption100km = 10
-                },
                 Length = 100,
                 PassengerRoutes = new List<PassengerRoute>
                 {
@@ -96,9 +84,9 @@ namespace DriveTracker.Tests.Services
 
             };
             var priceForLiter = 2;
-
+            var fuelConsumption100km = 10;
             //Act
-            journeyService.GiveTotalPrices(journey, priceForLiter);
+            journeyService.GiveTotalPrices(journey, priceForLiter,fuelConsumption100km);
             var expected = 5;
             var actual1 = journey.PassengerRoutes[0].TotalPrice;
             var actual2 = journey.PassengerRoutes[1].TotalPrice;
@@ -117,10 +105,6 @@ namespace DriveTracker.Tests.Services
             var journeyService = new JourneyService();
             var journey = new Journey
             {
-                Car = new Car
-                {
-                    FuelConsumption100km = 10
-                },
                 Length = 100,
                 PassengerRoutes = new List<PassengerRoute>
                 {
@@ -140,9 +124,9 @@ namespace DriveTracker.Tests.Services
 
             };
             var priceForLiter = 2;
-
+            var fuelConsumption100km = 10;
             //Act
-            journeyService.GiveTotalPrices(journey, priceForLiter);
+            journeyService.GiveTotalPrices(journey, priceForLiter,fuelConsumption100km);
             var expected1 = 7.5m;
             var expected2 = 2.5m;
             var expected3 = 2.5m;
@@ -163,10 +147,6 @@ namespace DriveTracker.Tests.Services
             var journeyService = new JourneyService();
             var journey = new Journey
             {
-                Car = new Car
-                {
-                    FuelConsumption100km = 10
-                },
                 Length = 100,
                 PassengerRoutes = new List<PassengerRoute>
                 {
@@ -190,9 +170,9 @@ namespace DriveTracker.Tests.Services
 
             };
             var priceForLiter = 2;
-
+            var fuelConsumption100km = 10;
             //Act
-            journeyService.GiveTotalPrices(journey, priceForLiter);
+            journeyService.GiveTotalPrices(journey, priceForLiter,fuelConsumption100km);
             var expected1 = 5.32m;
             var expected2 = 2.82m;
             var expected3 = 1.15m;

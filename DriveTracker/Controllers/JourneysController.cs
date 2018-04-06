@@ -24,6 +24,8 @@ namespace DriveTracker.Controllers
         private IAppRepository _appRepository;
         private IUserService _userService;
         private IPaymentRepository _paymentRepository;
+        private IPassengerRouteRepository _passengerRouteRepository;
+        private IPassengerRouteService _passengerRouteService;
 
         public JourneysController(IJourneyRepository journeyRepository,
                                   IUserRepository userRepository,
@@ -32,7 +34,9 @@ namespace DriveTracker.Controllers
                                   IPaymentService paymentService,
                                   IAppRepository appRepository,
                                   IUserService userService,
-                                  IPaymentRepository paymentRepository)
+                                  IPaymentRepository paymentRepository,
+                                  IPassengerRouteRepository passengerRouteRepository,
+                                  IPassengerRouteService passengerRouteService)
         {
             _journeyRepository = journeyRepository;
             _userRepository = userRepository;
@@ -42,6 +46,8 @@ namespace DriveTracker.Controllers
             _appRepository = appRepository;
             _userService = userService;
             _paymentRepository = paymentRepository;
+            _passengerRouteRepository = passengerRouteRepository;
+            _passengerRouteService = passengerRouteService;
 
 
         }
@@ -143,7 +149,6 @@ namespace DriveTracker.Controllers
         }
 
         [HttpPost, Route("cars/{carId}/journeys")]
-        //send notification to users
         public IHttpActionResult CreateJourney([FromBody]JourneyForCreationDto JourneyFromBody, int userId, int carId)
         {
             try
@@ -155,11 +160,6 @@ namespace DriveTracker.Controllers
 
                 var car = _carRepository.GetCarForUser(userId, carId, false);
 
-                //if (!_carRepository.CarExistsForUser(userId, carId))
-                //{
-                //    return NotFound();
-                //}
-
                 if(car==null)
                 {
                     return NotFound();
@@ -170,13 +170,29 @@ namespace DriveTracker.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var journey = Mapper.Map<Journey>(JourneyFromBody);
+                var routes = Mapper.Map<IEnumerable<PassengerRoute>>(JourneyFromBody.Routes);
 
+                if (!_passengerRouteRepository.UsersExistForRoutes(routes))
+                {
+                    return BadRequest();
+                }
+
+                if(_passengerRouteService.SameUserForRoutes(routes))
+                {
+                    return BadRequest();
+                }
+
+                 _passengerRouteRepository.SetUsersForRoutes(routes);
+
+                var journey = Mapper.Map<Journey>(JourneyFromBody);
+     
+                journey.PassengerRoutes.AddRange(routes);
+               
                 _journeyService.GiveTotalPrices(journey, (double)JourneyFromBody.PriceForLiter,car.FuelConsumption100km);
 
-                var payments = _paymentService.GeneratePayments(journey);
+                var payments = _paymentService.GeneratePayments(journey,userId);
 
-                _userService.EditUserPaymentStatistics(payments);
+                _userService.EditUsersPaymentStatistics(payments,userId);
 
                 //notification service albo repozytorium wysle notyfikacje 
 
@@ -184,7 +200,7 @@ namespace DriveTracker.Controllers
 
                 _paymentRepository.AddPayments(payments);
 
-                if(!_appRepository.Commit())
+                if (!_appRepository.Commit())
                 {
                     return InternalServerError();
                 }

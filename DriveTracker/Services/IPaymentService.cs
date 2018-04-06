@@ -9,6 +9,6 @@ namespace DriveTracker.Services
 {
     public interface IPaymentService
     {
-        IEnumerable<Payment> GeneratePayments(Journey journey);
+        IEnumerable<Payment> GeneratePayments(Journey journey,int journeyUserId);
     }
 }

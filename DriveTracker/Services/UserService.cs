@@ -1,4 +1,5 @@
 ﻿using DriveTracker.Entities;
+using DriveTracker.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,20 +9,31 @@ namespace DriveTracker.Services
 {
     public class UserService : IUserService
     {
-        public void EditUserPaymentStatistics(IEnumerable<Payment> payments)
+        private IUserRepository _userRepository;
+
+        public UserService(IUserRepository userRepository)
         {
-            var receiver = payments.FirstOrDefault().Receiver;
+            _userRepository = userRepository;
+        }
+        public void EditUsersPaymentStatistics(IEnumerable<Payment> payments,int receiverId)
+        {
+            var receiver = _userRepository.GetUser(receiverId);
                 
             if(receiver==null)
             {
-                return;
+                throw new Exception("UserService EditUsersPaymentStatistics receiver==null");
             }
 
             receiver.ToReceive = payments.Sum(p => p.Amount);
 
-           foreach(var payment in payments)
+            foreach (var payment in payments)
             {
-                payment.Payer.ToPay = payment.Amount;
+                var payer = _userRepository.GetUser(payment.PayerId);
+                if (payer == null)
+                {
+                    throw new Exception("UserService EditUsersPaymentStatistics payer==null");
+                }
+                payer.ToPay = payment.Amount;
             }
         }
 

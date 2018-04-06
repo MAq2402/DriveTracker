@@ -9,13 +9,13 @@ namespace DriveTracker.Models.Journeys
 {
     public class JourneyForCreationDto
     {
-        [Required,MaxLength(50)]
+        [Required, MaxLength(50)]
         public string Destination { get; set; }
 
         [Required, MaxLength(50)]
         public string Start { get; set; }
 
-        [Required,Range(1,400000)]
+        [Required, Range(1, 400000)]
         public int Length { get; set; }
 
         //[Required]
@@ -24,9 +24,9 @@ namespace DriveTracker.Models.Journeys
         //[Required]
         //public int UserId { get; set; }
 
-        [Required,Range(0,200)]
+        [Required, Range(0, 200)]
         public decimal PriceForLiter { get; set; }
-        PassangerRouteForCreationDto[] Routes { get; set; } = new PassangerRouteForCreationDto[10];
+        public ICollection<PassangerRouteForCreationDto> Routes { get; set; } = new List<PassangerRouteForCreationDto>();
         //public PassangerRouteForCreationDto Routes { get; set; }
     }
 }

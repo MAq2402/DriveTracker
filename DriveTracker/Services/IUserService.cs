@@ -9,7 +9,7 @@ namespace DriveTracker.Services
 {
     public interface IUserService
     {
-        void EditUserPaymentStatistics(IEnumerable<Payment> payments);
+        void EditUsersPaymentStatistics(IEnumerable<Payment> payments,int receiverId);
     }
 
 }

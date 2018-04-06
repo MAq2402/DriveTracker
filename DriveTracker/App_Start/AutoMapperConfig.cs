@@ -24,7 +24,8 @@ namespace DriveTracker.App_Start
                 config.CreateMap<DriveTracker.Entities.Journey, DriveTracker.Models.Journeys.JourneyDto>();
                 config.CreateMap<DriveTracker.Models.Journeys.JourneyForCreationDto, DriveTracker.Entities.Journey>();
             
-                config.CreateMap<DriveTracker.Entities.PassengerRoute, DriveTracker.Models.SingleUserJourneys.PassengerRouteDto>();
+                config.CreateMap<DriveTracker.Entities.PassengerRoute, DriveTracker.Models.PassengerRoute.PassengerRouteDto>();
+                config.CreateMap<DriveTracker.Models.PassengerRoute.PassangerRouteForCreationDto,DriveTracker.Entities.PassengerRoute>();
             });
         }
             

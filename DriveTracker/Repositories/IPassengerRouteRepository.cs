@@ -9,10 +9,10 @@ namespace DriveTracker.Repositories
 {
     public interface IPassengerRouteRepository
     {
-        void AddSingleUserJourneyForUserAndJourney(int userId,int journeyId,PassengerRoute singleUserJourney);
-        IQueryable<PassengerRoute> GetSingleUserJourneysForUserAndJourney(int userId, int journeyId);
-        PassengerRoute GetSingleUserJourneyForUserAndJourney(int userId, int journeyId, int id);
-        void DeleteSingleUserJourneyForUserAndJourney(int userId, int journeyId, int id);
+        
+        bool UsersExistForRoutes(IEnumerable<PassengerRoute> passengerRoutes);
+
+        void SetUsersForRoutes(IEnumerable<PassengerRoute> passengerRoutes);
 
     }
 }

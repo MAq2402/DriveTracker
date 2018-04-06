@@ -1,5 +1,5 @@
 ﻿
-using DriveTracker.Models.SingleUserJourneys;
+using DriveTracker.Models.PassengerRoute;
 using System;
 using System.Collections.Generic;
 using System.Linq;

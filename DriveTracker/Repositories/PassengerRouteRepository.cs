@@ -2,30 +2,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using DriveTracker.DbContexts;
 using DriveTracker.Entities;
 
 namespace DriveTracker.Repositories
 {
     public class PassengerRouteRepository : IPassengerRouteRepository
     {
-        public void AddSingleUserJourneyForUserAndJourney(int userId, int journeyId, PassengerRoute singleUserJourney)
+        private AppDbContext _context;
+
+        public PassengerRouteRepository(AppDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public void DeleteSingleUserJourneyForUserAndJourney(int userId, int journeyId, int id)
+        public void SetUsersForRoutes(IEnumerable<PassengerRoute> passengerRoutes)
         {
-            throw new NotImplementedException();
+            foreach(var route in passengerRoutes)
+            {
+                route.User = _context.Users.FirstOrDefault(u => u.Id == route.UserId);
+            }
         }
 
-        public PassengerRoute GetSingleUserJourneyForUserAndJourney(int userId, int journeyId, int id)
+        public bool UsersExistForRoutes(IEnumerable<PassengerRoute> passengerRoutes)
         {
-            throw new NotImplementedException();
-        }
-
-        public IQueryable<PassengerRoute> GetSingleUserJourneysForUserAndJourney(int userId, int journeyId)
-        {
-            throw new NotImplementedException();
+            foreach(var route in passengerRoutes)
+            {
+                if(!_context.Users.Any(u => u.Id == route.UserId))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

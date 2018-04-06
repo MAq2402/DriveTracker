@@ -115,7 +115,7 @@ namespace DriveTracker.Controllers
 
                 return CreatedAtRoute("GetCar",new {id = carToReturn.Id }, carToReturn);
             }
-            catch(Exception)
+            catch(Exception e)
             {           
                 return InternalServerError();
             }

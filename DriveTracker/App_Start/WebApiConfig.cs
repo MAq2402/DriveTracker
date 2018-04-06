@@ -30,7 +30,8 @@ namespace DriveTracker
             container.RegisterType<IPaymentService, PaymentService>();
             container.RegisterType<IJourneyService, JourneyService>();
             container.RegisterType<IUserService, UserService>();
-            
+            container.RegisterType<IPassengerRouteService, PassengerRouteService>();
+
 
             config.DependencyResolver = new UnityResolver(container);
             // Konfiguracja i usługi składnika Web API

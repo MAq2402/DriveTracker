@@ -14,13 +14,13 @@ namespace DriveTracker.Models.Cars
         public string Name { get; set; }
 
         [Required]
-        [Range(1,200)]
+        [Range(1,100)]
         public double FuelConsumption100km { get; set; }
 
         [Required]
         public FuelType FuelType { get; set; }
 
-        [Required]
-        public int UserId { get; set; }
+        //[Required]
+        //public int UserId { get; set; }
     }
 }

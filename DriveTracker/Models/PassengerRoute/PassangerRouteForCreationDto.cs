@@ -8,6 +8,7 @@ namespace DriveTracker.Models.PassengerRoute
 {
     public class PassangerRouteForCreationDto
     {
+
         [Required, MaxLength(50)]
         public string Destination { get; set; }
 
@@ -16,5 +17,8 @@ namespace DriveTracker.Models.PassengerRoute
 
         [Required, Range(1, 400000)]
         public int Length { get; set; }
+
+        [Required]
+        public int UserId { get; set; }
     }
 }

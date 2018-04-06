@@ -18,8 +18,8 @@ namespace DriveTracker.Repositories
         }
         public void AddJourneyForUserAndCar(int userId, int carId,Journey journey)
         {
+            journey.CarId = carId;
             _context.Users.FirstOrDefault(u => u.Id == userId)
-                    .Cars.FirstOrDefault(c => c.Id == carId)
                     .Journeys.Add(journey);
         }
 
